@@ -93,6 +93,7 @@ print(number_group(10))
 print(number_group(-5))  
 print(number_group(0))   
 
+# While Loops
 x=0
 while x < 5:
     print("Not there yet, x=" + str(x))
@@ -177,8 +178,128 @@ def print_prime_factors(number):
         else:
             factor += 1
     return "Done"        
-print_prime_factors(100)  
+print_prime_factors(5)  
 print_prime_factors(0) 
-print_prime_factors(39)
+print_prime_factors(37)
 print_prime_factors(36)
+
+# For Loops
+for x in range(5): # 0,1,2,3,4
+    print(x)
+
+# this function returns the sum of all the squares of numbers between 0 and x (not included). 
+def square(n):
+    return n*n
+def sum_squares(x):
+    sum = 0
+    for n in range(x):
+        sum += square(n)
+    return sum
+print(sum_squares(10))  # s/be 285 
+
+friends = ['Alex', 'Zoe', 'Pat']
+for friend in friends:
+    print("Hi " + friend)
+
+# calculating sum and average
+values = [8, 11, 14, 17]
+sum = 0
+length = 0
+for value in values:
+    sum += value
+    length +=1
+print("Sum: " + str(sum) + " | Average: " + str(sum/length)) 
+
+# calculating product from 1 to 10
+product = 1
+for n in range(1,10):
+    product = product*n
+print(product) 
+
+# factorial of 4 (4!)
+def factorial(n):
+    result = 1
+    for i in range(1, n+1):
+        result = result*i
+    return result
+print(factorial(4))  # should return 24
+print(factorial(5))  # should return 120
+
+# convert to Celsius table
+def to_celsius(x):
+    return (x-32)*5/9
+for x in range(0, 101, 10): #starts at 0, ends at 100, jumps by 10
+    print(x, to_celsius(x))  
+
+# Nested for Loops
+
+#dominoes
+for left in range(7):
+    for right in range(left,7):
+        print("[" + str(left) + "|" + str(right) + "]", end=" ")
+    print()  
+
+teams = ['Dragons', 'Wolves', 'Pandas', 'Unicorns'] 
+for home_team in teams:
+     for away_team in teams:
+         if home_team != away_team :
+             print(home_team + " vs " + away_team) 
+
+def is_valid(user):
+    if len(user) >= 3:
+        return True
+    else:
+        return False    
+def validate_users(users):
+    for user in [users]:
+        if is_valid(user):
+            print(user + " is valid")
+        else:
+            print(user + " is invalid")
+validate_users("purplecat") 
+validate_users("mu")            
+     
+# print the first 10 factorials (from 0 to 9) with the corresponding number
+def factorial(n):
+    result = 1
+    for n in range(1, n+1):
+        result = result*n
+    return result
+for n in range(0, 11):  
+    print(n, factorial(n))  
+
+# print the first 10 cube numbers (x**3) 
+for x in range(1, 11):
+    print(x**3)      
+
+# print multiples of 7 from 0 to 100
+for x in range(0, 101, 7):
+    print(x)  
+
+# factorial using recursion
+def factorial(n):
+    if n < 2:
+        return 1
+    return n*factorial(n-1) 
+print(factorial(4))  
+
+# sum of positive numbers
+def sum_positive_numbers(n):
+    if n < 1:
+        return 0
+    return n + sum_positive_numbers(n-1)
+print(sum_positive_numbers(3)) # s/be 6
+print(sum_positive_numbers(5)) # s/be 15   
+
+# function returns whether the number is a power of the given base
+def is_power_of(number,base):
+    if number < base: # Base case: when number is smaller than base
+        return number == 1 # If number is equal to 1, it's a power (base**0)
+    return is_power_of(number/base, base) # Recursive case: keep dividing number by base 
+print(is_power_of(8,2)) #s/be True
+print(is_power_of(64,4)) #s/be True
+print(is_power_of(70,10)) #s/be False
+
+
+
         
