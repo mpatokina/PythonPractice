@@ -300,6 +300,214 @@ print(is_power_of(8,2)) #s/be True
 print(is_power_of(64,4)) #s/be True
 print(is_power_of(70,10)) #s/be False
 
+# Module 3 Graded Assessment
+
+# print out the numbers 1 through 7
+
+number = 1
+while number <= 7:
+	print(number, end=" ")
+	number +=1
+ 
+# print out each letter of a word on a separate line
+
+def show_letters(word):
+    for letter in word:
+        print(letter)
+show_letters(" Hello") 
+
+# function digits(n) that returns how many digits the number has
+def digits(n):
+    count = 0
+    if n == 0:
+        return 1
+    while n > 0:
+        count += 1
+        n = n//10
+    return count
+print(digits(100)) 
+print(digits(25)) 
+print(digits(9))
+print(digits(0)) 
+
+# This function prints out a multiplication table 
+# (where each number is the result of multiplying the first number of its row by the number at the top of its column)
+
+def multiplication_table(start, stop):
+    for x in range(start, stop + 1):
+        for y in range(start, stop + 1):
+            print(str(x*y), end = " ")
+        print()        
+multiplication_table(1, 3) 
+
+# The counter function counts down from start to stop when start is bigger than stop, and counts up from start to stop otherwise. 
+
+def counter(start, stop):
+    x = start
+    if x > stop:
+        return_string = "Counting down: "
+        while x >= stop:
+            return_string +=  str(x)
+            if x > stop:
+                return_string += ", "
+            x = x - 1
+    else:
+        return_string = "Counting up: "
+        while x <= stop:
+            return_string += str(x)
+            if x < stop:
+                return_string += ", "
+            x = x + 1
+    return return_string        
+print(counter(1, 5)) 
+print(counter(7, 1))
+print(counter(7, 7))                
+
+# The even_numbers function returns a space-separated string of all positive numbers that are divisible by 2, up to and including the maximum that's passed into the function.
+
+def even_numbers(maximum):
+    return_string = ""
+    for x in range(2, maximum+1, 2):
+        return_string += str(x) + " "
+    return return_string.strip()
+print(even_numbers(6))  # Should be 2 4 6
+print(even_numbers(10)) # Should be 2 4 6 8 10
+print(even_numbers(1))  # No numbers displayed
+print(even_numbers(3))  # Should be 2
+print(even_numbers(0))  # No numbers displayed  
+
+# How does this function need to be called to print yes, no, and maybe as possible options to vote for?
+def votes(params):
+	for vote in params:
+	    print("Possible option:" + vote)
+votes(['Yes', 'No', 'Maybe'])        
+
+# Week 4
+#Strings
+
+name = "Maria"
+print(name[0])
+print(name[4])
+print(name[-3])
+print(name[1:3])
+print(len(name))
+
+fruit = "Pineapple"
+print(fruit[:4])
+print(fruit[4:])
+
+message = "A kong string"
+new_message = message[0:2] + "l" + message[3:]
+print(new_message)
 
 
+pets = "Cats & Dogs"
+print(pets.index("&"))
+print(pets.index("C"))
+print(pets.index("Dogs"))
+print(pets.index("s")) # shows only the first one
+
+print("Dragons" in pets)
+print("Dogs" in pets)
+
+print("Mountains".upper())
+print("Mountains".lower())
+
+answer = "YES"
+if answer.lower() == "yes":
+    print("User said yes")
+
+print("Electricity".count("t"))  
+
+print("Forest".endswith("rest"))
+
+print("Forest".isnumeric())
+
+print("12345".isnumeric())
+
+print(int("123") + int("567"))
+
+print("@".join(["name", "hotmail.com"]))
+
+print("This is another example".split())
+
+name = "Maria"
+number = len(name) * 3
+print("Hello, {} your lucky number is {}".format(name, number))
+
+print("Your lucky number is {number}, {name}".format(name=name, number=len(name)*3))
+
+price = 7.5
+with_tax = price * 1.09
+print(price, with_tax)
+print("Price: ${:.2f}. With Tax: ${:.2f}".format(price, with_tax))
+
+def to_celsius_new(x):
+    return (x-32)*5/9
+for x in range(0, 101, 10):
+    print("{:>3} F | {:>6.2f} C".format(x, to_celsius_new(x))) 
+    
+def double_word(word):
+    return word*2 + str(len(word)*2)
+print(double_word("hello")) 
+
+def first_last(message):
+    if len(message) == 0:
+        return True
+    elif message[0] == message[-1]:
+        return True
+    else:
+        return False
+print(first_last("else"))   
+print(first_last("Mom"))    
+print(first_last(""))    
+
+word = "abcdefghijklmnopqrstuvwxyz"
+print(word.index('p'))
+
+def initials(phrase):
+    words = phrase.split()
+    result = ""
+    for word in words:
+        result += word[0]
+    return result.upper()
+print(initials("local area network"))   
+
+def student(name, grade):
+    return "{} received {}% on the exam".format(name, grade)
+print(student("Anna", 99))   
+
+def is_polindrome(input_string):
+    input_string = input_string.lower()
+    new_string = ""
+    reverse_string = ""
+    for x in input_string:
+        if x != " ":
+            new_string = new_string + x
+            reverse_string = x + reverse_string
+    if new_string == reverse_string:
+        return True  
+    return False
+print(is_polindrome("Never Odd or Even"))  
+print(is_polindrome("abc"))     
+print(is_polindrome("kayak"))
+
+def nametag(first_name, last_name):
+    return ("{} {:.1s}.".format(first_name, last_name))
+print(nametag("Anna", "Smith")) 
+
+def replace_ending(sentence, old, new):
+    if sentence.endswith(old):
+       # i = len(sentence)
+       # l = len(old)
+       # new_sentence = sentence[0: i-l] + new
+        i = len(old)
+        new_sentence = sentence[:-i] + new
+        return new_sentence
+    return sentence
+print(replace_ending("it's raining cats and cats", "cats", "dogs")) 
+print(replace_ending("I have a cat", "Cat", "Dog"))
+print(replace_ending("I have a Cat", "Cat", "Dog"))            
         
+
+
