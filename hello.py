@@ -901,3 +901,167 @@ Rorys_guests = { "Adam":2, "Brenda":3, "David":1, "Jose":3, "Charlotte":2, "Terr
 Taylors_guests = { "David":4, "Nancy":1, "Robert":2, "Adam":1, "Samantha":3, "Chris":5}
 
 print(combine_guests(Rorys_guests, Taylors_guests))
+
+# Week 5 OOP
+
+# 2
+
+class Person:
+    apples = 0
+    ideas = 0
+
+johanna = Person()
+johanna.apples = 1
+johanna.ideas = 1
+
+martin = Person()
+martin.apples = 2
+martin.ideas = 1
+
+def exchange_apples(you, me):
+    temp = me.apples       
+    me.apples = you.apples
+    you.apples = temp
+    return you.apples, me.apples
+def exchange_ideas(you, me):
+    you.ideas = you.ideas + me.ideas
+    me.ideas = you.ideas
+    return you.ideas, me.ideas
+
+exchange_apples(johanna, martin)
+print("Johanna has {} apples and Martin has {} apples".format(johanna.apples, martin.apples))
+exchange_ideas(johanna, martin)
+print("Johanna has {} ideas and Martin has {} ideas".format(johanna.ideas, martin.ideas))
+
+
+#3
+# The City class has the following attributes: name, country (where the city is located), elevation (measured in meters), and population (approximate, according to recent statistics). Fill in the blanks of the max_elevation_city function to return the name of the city and its country (separated by a comma), when comparing the 3 defined instances for a specified minimal population. For example, calling the function for a minimum population of 1 million: max_elevation_city(1000000) should return "Sofia, Bulgaria". 
+
+class City:
+	name = ""
+	country = ""
+	elevation = 0 
+	population = 0
+
+# create a new instance of the City class and
+# define each attribute
+city1 = City()
+city1.name = "Cusco"
+city1.country = "Peru"
+city1.elevation = 3399
+city1.population = 358052
+
+# create a new instance of the City class and
+# define each attribute
+city2 = City()
+city2.name = "Sofia"
+city2.country = "Bulgaria"
+city2.elevation = 2290
+city2.population = 1241675
+city3 = City()
+city3.name = "Seoul"
+city3.country = "South Korea"
+city3.elevation = 38
+city3.population = 9733509
+
+def max_elevation_city(min_population):
+	highest_elevation = 0
+	
+# Initialize the variable that will hold 
+# the information of the city with 
+# the highest elevation 
+	return_city = City()
+	if (city1.population >= min_population) and (city1.elevation > highest_elevation):
+		return_city = city1
+		highest_elevation = city1.elevation
+	# Evaluate the 2nd instance to meet the requirements:
+	# does city #2 have at least min_population and
+	# is its elevation the highest evaluated so far?
+	if (city2.population >= min_population) and (city2.elevation > highest_elevation):
+		return_city = city2
+		highest_elevation = city2.elevation
+	# Evaluate the 3rd instance to meet the requirements:
+	# does city #3 have at least min_population and
+	# is its elevation the highest evaluated so far?
+	if (city3.population >= min_population) and (city3.elevation > highest_elevation):
+		return_city = city3
+		highest_elevation = city3.elevation
+
+	#Format the return string
+	if return_city.name:
+		return ("{}, {}".format(return_city.name, return_city.country))
+	else:
+		return ""
+
+print(max_elevation_city(100000)) # Should print "Cusco, Peru"
+print(max_elevation_city(1000000)) # Should print "Sofia, Bulgaria"
+print(max_elevation_city(10000000)) # Should print ""
+
+#5
+class Furniture:
+	color = ""
+	material = ""
+
+table = Furniture()
+table.color = "brown"
+table.material = "wood"
+
+couch = Furniture()
+couch.color = "red"
+couch.material = "leather"
+
+def describe_furniture(piece):
+	return ("This piece of furniture is made of {} {}".format(piece.color, piece.material))
+
+print(describe_furniture(table)) 
+# Should be "This piece of furniture is made of brown wood"
+print(describe_furniture(couch)) 
+# Should be "This piece of furniture is made of red leather"
+
+
+
+# Classes and Methods
+# lab
+class Elevator:
+    def __init__(self, bottom, top, current):
+        """Initializes the Elevator instance."""
+        self.bottom = bottom
+        self.top = top 
+        self.current = current
+    def up(self):
+        """Makes the elevator go up one floor."""
+        if self.current < self.top:
+            self.current += 1
+        else:
+            self.curret = self.top
+    def down(self):
+        """Makes the elevator go down one floor."""
+        if self.current > self.bottom:
+            self.current -= 1
+        else:
+            self.current = self.bottom
+    def go_to(self, floor):
+        """Makes the elevator go to the specific floor."""
+        self.current = floor
+        
+    def __str__(self):
+        return "Current floor: {}".format(self.current)
+
+
+elevator = Elevator(-1, 10, 0)
+
+# Go to the top floor. Try to go up, it should stay. Then go down.
+elevator.go_to(10)
+elevator.up()
+elevator.down()
+print(elevator.current) # should be 9
+# Go to the bottom floor. Try to go down, it should stay. Then go up.
+elevator.go_to(-1)
+elevator.down()
+elevator.down()
+elevator.up()
+elevator.up()
+print(elevator.current) # should be 1
+
+elevator.go_to(5)
+print(elevator)
