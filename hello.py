@@ -1018,7 +1018,65 @@ print(describe_furniture(table))
 print(describe_furniture(couch)) 
 # Should be "This piece of furniture is made of red leather"
 
+class Piglet:
+    def speak(self):
+        print("oink oink")
+hamlet = Piglet()
+hamlet.speak()
 
+class Piglet:
+    name = "piglet"
+    def speak(self):
+        print("Oink! I'm {}! Oink!".format(self.name))
+hamlet = Piglet()
+hamlet.name = "Hamlet"
+hamlet.speak()
+petunia = Piglet()
+petunia.name = "Petunia" 
+petunia.speak()       
+
+class Piglet:
+    years = 0
+    def pig_years(self):
+        return self.years * 18
+piggy = Piglet()
+print(piggy.pig_years())  
+piggy.years = 2
+print(piggy.pig_years())    
+
+# Constructors
+
+
+class Apple:
+    def __init__(self, color, flavor):
+        self.color = color
+        self.flavor = flavor
+jonagold = Apple("red", "sweet")
+print(jonagold.color) 
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+    def greeting(self):
+        return ("hi, my name is {}".format(self.name))  
+some_person = Person("Anna")       
+print(some_person.greeting())   
+
+class Apple:
+    def __init__(self, color, flavor):
+        self.color = color
+        self.flavor = flavor
+    def __str__(self):
+        return "This apple is {} and its flavor is {}".format(self.color, self.flavor) 
+jonagold = Apple("red", "sweet") 
+print(jonagold)   
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+    def greeting(self):
+        lidia = Person("Lidia")
+        print("Hello! My name is {name}".format(name = self.name))
 
 # Classes and Methods
 # lab
@@ -1065,3 +1123,140 @@ print(elevator.current) # should be 1
 
 elevator.go_to(5)
 print(elevator)
+
+# Code Reuse
+# Inheritance
+
+class Fruit: #Parent
+    def __init__(self, color, flavor):
+        self.color = color
+        self.flavor = flavor
+class Apple(Fruit):
+    pass
+class Grape(Fruit):
+    pass
+granny_smith = Apple("green", "tart")
+carnelian = Grape("purple", "sweet")
+print(granny_smith.flavor)
+print(carnelian.color)
+
+class Animal:
+    sound = ""
+    def __init__(self, name):
+        self.name = name
+    def speak(self):
+        print("{sound} I'm {name}! {sound}".format(name = self.name, sound = self.sound))
+class Piglet(Animal):
+    sound = "Oink!" 
+hamlet = Piglet("Hamlet")
+hamlet.speak()
+class Cow(Animal):
+    sound = "Mooooo!"
+milky = Cow("Milky White")  
+milky.speak()     
+
+class Clothing:
+    material = ""
+    def __init__(self, name):
+        self.name = name
+    def checkmaterial(self):
+        print("This {} is made of {}".format(self.name, self.material)) 
+class Shirt(Clothing):
+    material = "cotton"    
+polo = Shirt("Polo") 
+polo.checkmaterial()   
+
+class Clothing:
+  stock={ 'name': [],'material' :[], 'amount':[]}
+  def __init__(self,name):
+    material = ""
+    self.name = name
+  def add_item(self, name, material, amount):
+    Clothing.stock['name'].append(self.name)
+    Clothing.stock['material'].append(self.material)
+    Clothing.stock['amount'].append(amount)
+  def Stock_by_Material(self, material):
+    count=0
+    n=0
+    for item in Clothing.stock['material']:
+      if item == material:
+        count += Clothing.stock['amount'][n]
+        n+=1
+    return count
+
+class shirt(Clothing):
+  material="Cotton"
+class pants(Clothing):
+  material="Cotton"
+  
+polo = shirt("Polo")
+sweatpants = pants("Sweatpants")
+polo.add_item(polo.name, polo.material, 4)
+sweatpants.add_item(sweatpants.name, sweatpants.material, 6)
+current_stock = polo.Stock_by_Material("Cotton")
+print(current_stock)
+
+
+# Python Modules
+import random
+x = random.randint(1,10)
+print(x)
+
+import datetime
+now = datetime.datetime.now()
+print(type(now))
+print(now)
+print(now.year)
+print(now + datetime.timedelta(days=90))
+
+# lab
+class Animal:
+    name = ""
+    category = ""
+    
+    def __init__(self, name):
+        self.name = name
+    
+    def set_category(self, category):
+        self.category = category
+
+class Turtle(Animal):
+    category = "reptile"
+
+print(Turtle.category)
+
+class Snake(Animal):
+    category = "reptile"
+
+class Bear(Animal):
+    category = "mammal"    
+
+class Zoo:
+    def __init__(self):
+        self.current_animals = {}
+    
+    def add_animal(self, animal):
+        self.current_animals[animal.name] = animal.category
+    
+    def total_of_category(self, category):
+        result = 0
+        for animal in self.current_animals.values():
+            if animal == category:
+                result += 1
+        return result
+
+zoo = Zoo()
+
+turtle = Turtle("Turtle") #create an instance of the Turtle class
+snake = Snake("Snake") #create an instance of the Snake class
+bear = Bear("Bear")
+
+zoo.add_animal(turtle)
+zoo.add_animal(snake)
+zoo.add_animal(bear)
+
+print(zoo.total_of_category("reptile")) #how many zoo animal types in the reptile category
+print(zoo.total_of_category("mammal")) #how many zoo animal types in the reptile category
+
+
+
