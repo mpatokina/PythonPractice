@@ -1368,3 +1368,119 @@ for connection in range(20):
 print(l)
 
 print(l.avg_load())
+
+# Week 6
+
+# sort list
+numbers = [5,4,2,7,1]
+numbers.sort()
+print(numbers)
+
+names = ["Carlos", "Ray", "Alex", "Kelly"]
+print(sorted(names))
+print(names)
+print(sorted(names, key=len))
+
+# Practice
+
+def get_event_date(event):
+  return event.date
+
+def current_users(events):
+  events.sort(key=get_event_date)
+  machines = {}
+  for event in events:
+    if event.machine not in machines:
+      machines[event.machine] = set()
+    if event.type == "login":
+      machines[event.machine].add(event.user)
+    elif event.type == "logout" and event.user in machines[event.machine]:
+        machines[event.machine].remove(event.user)
+        
+  return machines
+
+def generate_report(machines):
+  for machine, users in machines.items():
+    if len(users) > 0:
+        user_list = ", ".join(users)
+    print("{}: {}".format(machine, user_list))
+
+class Event:
+  def __init__(self, event_date, event_type, machine_name, user):
+    self.date = event_date
+    self.type = event_type
+    self.machine = machine_name
+    self.user = user
+
+events = [
+    Event('2020-01-21 12:45:56', 'login', 'myworkstation.local', 'jordan'),
+    Event('2020-01-22 15:53:42', 'logout', 'webserver.local', 'jordan'),
+    Event('2020-01-21 18:53:21', 'login', 'webserver.local', 'lane'),
+    Event('2020-01-22 10:25:34', 'logout', 'myworkstation.local', 'jordan'),
+    Event('2020-01-21 08:20:01', 'login', 'webserver.local', 'jordan'),
+    Event('2020-01-23 11:24:35', 'logout', 'mailserver.local', 'chris'),
+]
+
+users = current_users(events)
+print(users)
+
+generate_report(users)
+
+
+# Final Assignment
+
+def calculate_frequencies(file_contents):
+    # Here is a list of punctuations and uninteresting words you can use to process your text
+    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+    uninteresting_words = ["the", "a", "to", "if", "is", "it", "of", "and", "or", "an", "as", "i", "me", "my", \
+    "we", "our", "ours", "you", "your", "yours", "he", "she", "him", "his", "her", "hers", "its", "they", "them", \
+    "their", "what", "which", "who", "whom", "this", "that", "am", "are", "was", "were", "be", "been", "being", \
+    "have", "has", "had", "do", "does", "did", "but", "at", "by", "with", "from", "here", "when", "where", "how", \
+    "all", "any", "both", "each", "few", "more", "some", "such", "no", "nor", "too", "very", "can", "will", "just"]
+    
+    # LEARNER CODE START HERE
+    new_file_contents = "".join((char if char.isalpha() else " ") for char in file_contents).lower().split()
+    filter  = [word for word in new_file_contents if word not in list(punctuations) + uninteresting_words]
+    frequencies = {word: file_contents.count(word) for word in filter}
+    
+   
+    cloud = wordcloud.WordCloud()
+    cloud.generate_from_frequencies(frequencies)
+    return cloud.to_array()
+
+    
+# another version
+def calculate_frequencies(file_contents):
+    # Here is a list of punctuations and uninteresting words you can use to process your text
+    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+    uninteresting_words = ["the", "a", "to", "if", "is", "it", "of", "and", "or", "an", "as", "i", "me", "my", \
+    "we", "our", "ours", "you", "your", "yours", "he", "she", "him", "his", "her", "hers", "its", "they", "them", \
+    "their", "what", "which", "who", "whom", "this", "that", "am", "are", "was", "were", "be", "been", "being", \
+    "have", "has", "had", "do", "does", "did", "but", "at", "by", "with", "from", "here", "when", "where", "how", \
+    "all", "any", "both", "each", "few", "more", "some", "such", "no", "nor", "too", "very", "can", "will", "just"]
+    
+    # LEARNER CODE START HERE   
+
+    words = file_contents.split()
+    cleaned_file_contents = []
+
+    
+    for word in words:
+        if word not in punctuations:
+            cleaned_file_contents += word
+            
+    return cleaned_file_contents
+
+    lower_file_contents = cleaned_file_contents.lower()
+     
+    frequencies = {}
+    
+    for word in lower_file_contents:
+        if word not in uninteresting_words:
+            if word not in frequencies:
+                frequencies[word] = 1
+            else:    
+                frequencies[word] += 1
+                
+    return frequencies
+
